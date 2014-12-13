@@ -1,0 +1,12 @@
+[13-May-2014 00:55:54 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/collegeyig/wp-content/themes/cyig2013/index.php on line 1
+[13-May-2014 06:16:20 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/collegeyig/wp-content/themes/cyig2013/index.php on line 1
+[13-May-2014 12:38:05 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/collegeyig/wp-content/themes/cyig2013/index.php on line 1
+[13-May-2014 18:41:31 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/collegeyig/wp-content/themes/cyig2013/index.php on line 1
+[08-Jul-2014 01:33:08 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1
+[09-Jul-2014 13:40:10 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1
+[19-Aug-2014 00:12:27 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1
+[21-Aug-2014 10:16:41 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1
+[24-Aug-2014 01:30:19 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1
+[25-Aug-2014 19:39:13 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1
+[15-Nov-2014 01:07:47 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1
+[29-Nov-2014 19:23:19 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/index.php on line 1

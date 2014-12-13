@@ -1,0 +1,21 @@
+@font-face {
+				font-family: 'Cachet-Book';
+				src: url('../font/Cachet-Book.ttf') format('truetype'),
+						url('../font/Cachet-Book.eot?#iefix') format('embedded-opentype'),
+						url('../font/Cachet-Book.woff') format('woff'),
+						url('../font/Cachet-Book.svg#Cachet-Book') format('svg');
+		}
+@font-face {
+				font-family: 'Cachet-Bold';
+				src: url('../font/Cachet-Bold.ttf') format('truetype'),
+						url('../font/Cachet-Bold.eot?#iefix') format('embedded-opentype'),
+						url('../font/Cachet-Bold.woff') format('woff'),
+						url('../font/Cachet-Bold.svg#Cachet-Bold') format('svg');
+		}
+@font-face {
+				font-family: 'Cachet-Medium';
+				src: url('../font/Cachet-Medium.ttf') format('truetype'),
+						url('../font/Cachet-Medium.eot?#iefix') format('embedded-opentype'),
+						url('../font/Cachet-Medium.woff') format('woff'),
+						url('../font/Cachet-Medium.svg#Cachet-Medium') format('svg');
+		}

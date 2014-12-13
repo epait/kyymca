@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-inner">
+				        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+				        </button>
+				        <a class="brand" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><img src="<?php bloginfo('template_directory'); ?>/img/<?php the_field('theme_color', 'option'); ?>/yLogo.png"></a>
+				        <div id="logo">
+				        	<a href="<?php echo home_url( '/' ); ?>"><?php the_field('header_top_row', 'option'); ?><br><span id="secondRow"><?php the_field('header_bottom_row', 'option'); ?></span>
+				        	<span class="pull-right visible-desktop header-right">
+				        		<span id="rights"><?php the_field('header_tagline', 'option'); ?></span>
+				        		<span id="divider">|</span> 
+				        		<span id="est">Est. <?php the_field('header_establishment_year', 'option'); ?><!-- Year Established --></span> 
+				        	</span></a>
+				        </div>
+				        <span class="hidden-xs"> 
+				            <?php
+				             /** Loading WordPress Custom Menu  **/
+				             wp_nav_menu( array(
+				                'menu'            => 'mainMenu',
+				                'container_class' => 'nav-collapse',
+				                'menu_class'      => 'nav',
+				                'walker' 		  => new CSS_Menu_Maker_Walker(),
+				                'fallback_cb'     => '',
+				            ) ); ?>
+				        </span>
+				        <span class="visible-xs"> 
+				            <?php
+				             /** Loading WordPress Custom Menu  **/
+				             wp_nav_menu( array(
+				                'menu'            => 'mainMenu',
+				                'container_class' => 'nav-collapse',
+				                'menu_class'      => 'nav',
+				                'depth'           => 1,
+				                'fallback_cb'     => '',
+				            ) ); ?>
+				        </span>
+			    </div>
+			</nav>

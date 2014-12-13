@@ -1,0 +1,47 @@
+/*Custom Colors*/
+a:hover, h4, a.subhead, .pageTitle, .chapterTitle, #logo a:hover, .homepage-button a:hover, .pagination li a:hover, .sidebar-menu a:hover, .tweet-link:hover {
+	color: #a92b31 !important;
+}
+a, h5, #logo, #logo a, a.headline, .post-title a, .homepage-button a, .sidebar-menu a, .tweet-link {
+	color: #ed1c24 !important;
+}
+ .homepage-button-img path, .homepage-button-img text {
+ 	fill: #ed1c24;
+ }
+ .homepage-button a:hover .homepage-button-img path, .homepage-button a:hover .homepage-button-img text {
+ 	fill: #a92b31;
+ }
+.sidebarIcon {
+	color: #f15922 !important;
+}
+#thirdRow {
+	color: #f47920 !important;
+}
+#logo a:hover #thirdRow {
+	color: #dd5828 !important;
+}
+#searchsubmit, .header-search-bar button, .input-group.mobile-search-bar button, span.page.current, input[type=submit] {
+	background-color: #ed1c24;
+}
+#searchsubmit:hover, .header-search-bar button:hover, .input-group.mobile-search-bar button:hover, input[type=submit]:hover {
+	background-color: #a92b31;
+}
+.pagination li {
+	border: 1px solid #ed1c24;
+ 	color: #ed1c24;
+}
+#eventTitle, .officer-position, .sidebar-subtitle {
+	color: #f15922;
+}
+
+
+/*Breadcrumb colors*/
+#breadcrumb {
+	background-image: url('../img/red/breadcrumb_bg.png');
+}
+#bc_left{
+	background-image: url('../img/red/breadcrumb_left_bg.jpg');
+}
+#bc_spacer {
+	background-image: url('../img/red/breadcrumb_spacer.png');
+}

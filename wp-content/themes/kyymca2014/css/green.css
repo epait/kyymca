@@ -1,0 +1,47 @@
+/*Custom Colors*/
+a:hover, h4, a.subhead, .pageTitle, .chapterTitle, #logo a:hover, .homepage-button a:hover, .pagination li a:hover, .sidebar-menu a:hover {
+	color: #006b6b !important;
+}
+a, h5, #logo, #logo a, a.headline, .post-title a, .homepage-button a, .sidebar-menu a {
+	color: #01a490 !important;
+}
+ .homepage-button-img path, .homepage-button-img text {
+ 	fill: #01a490;
+ }
+ .homepage-button a:hover .homepage-button-img path, .homepage-button a:hover .homepage-button-img text {
+ 	fill: #006b6b;
+ }
+.sidebarIcon {
+	color: #20bdbe !important;
+}
+#thirdRow {
+	color: #0089d0 !important;
+}
+#logo a:hover #thirdRow {
+	color: #0060af !important;
+}
+#searchsubmit, .header-search-bar button, .input-group.mobile-search-bar button, span.page.current, input[type=submit] {
+	background-color: #01a490;
+}
+#searchsubmit:hover, .header-search-bar button:hover, .input-group.mobile-search-bar button:hover, input[type=submit]:hover {
+	background-color: #006b6b;
+}
+.pagination li {
+	border: 1px solid #01a490;
+ 	color: #01a490;
+}
+#eventTitle, .officer-position, .sidebar-subtitle {
+	color: #20bdbe;
+}
+
+
+/*Breadcrumb colors*/
+#breadcrumb {
+	background-image: url('../img/green/breadcrumb_bg.png');
+}
+#bc_left{
+	background-image: url('../img/green/breadcrumb_left_bg.jpg');
+}
+#bc_spacer {
+	background-image: url('../img/green/breadcrumb_spacer.png');
+}

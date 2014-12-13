@@ -1,0 +1,16 @@
+[01-Sep-2014 08:29:25 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/page-shop.php on line 36
+[01-Sep-2014 08:29:28 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home2/ericpait/public_html/clients/kyymca/wp-content/themes/kyymca2014/page-shop.php on line 36
+[01-Sep-2014 23:37:15 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+			WHERE p.processed IN (3, 4, 5)
+			GROUP BY cc.prodid
+			ORDER BY id ASC' at line 5 for query 
+			SELECT cc.prodid AS id, SUM(cc.quantity) AS sales, SUM(cc.quantity * cc.price) AS earnings
+			FROM wp_vslg_wpsc_purchase_logs AS p
+			INNER JOIN
+				wp_vslg_wpsc_cart_contents AS cc
+				ON p.id = cc.purchaseid AND cc.prodid IN ()
+			WHERE p.processed IN (3, 4, 5)
+			GROUP BY cc.prodid
+			ORDER BY id ASC
+			
+		 made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), call_user_func_array, wpsc_submit_checkout, do_action('wpsc_submit_checkout_gateway'), call_user_func_array, _wpsc_action_merchant_v2_submit_checkout, wpsc_merchant_testmode->submit, wpsc_merchant->set_purchase_processed_by_purchid, wpsc_update_purchase_log_status, WPSC_Purchase_Log->save, do_action('wpsc_update_purchase_log_status'), call_user_func_array, _wpsc_action_update_product_stats, WPSC_Product->__get, WPSC_Product->process_stats, WPSC_Purchase_Log::get_stats_for_product, WPSC_Purchase_Log::fetch_stats, WPSC_Product->__get, WPSC_Product->process_stats, WPSC_Purchase_Log::get_stats_for_product, WPSC_Purchase_Log::fetch_stats, WPSC_Product->__get, WPSC_Product->process_stats, WPSC_Purchase_Log::get_stats_for_product, WPSC_Purchase_Log::fetch_stats
