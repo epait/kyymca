@@ -106,7 +106,7 @@
 
 				         wp_nav_menu( array(
 
-				            'menu'            => 'header-menu',
+				            'theme_location'  => 'header-menu',
 
 				            'container_class' => 'nav-collapse',
 
@@ -140,7 +140,7 @@
 
 				         wp_nav_menu( array(
 
-				            'menu'            => 'header-menu',
+				            'theme_location'  => 'header-menu',
 
 				            'container_class' => 'nav-collapse',
 
