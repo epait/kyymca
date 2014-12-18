@@ -989,3 +989,46 @@ i.footer-icon {
 	margin: 0 0 15px;
 }
 
+
+
+/*Region Map*/
+[region="Metro"] {
+	fill: #f15922;
+}
+[region="Metro"]:hover {
+	cursor: pointer;
+	fill: #ED1D24;
+}
+
+[region="North"] {
+	fill: #c6168d;
+}
+[region="North"]:hover {
+	cursor: pointer;
+	fill: #92278F;
+}
+
+[region="East"] {
+	fill: #00aeef;
+}
+[region="East"]:hover {
+	cursor: pointer;
+	fill: #0089CF;
+}
+
+[region="Central"] {
+	fill: #FCAF17;
+}
+[region="Central"]:hover {
+	cursor: pointer;
+	fill: #F47920;
+}
+
+[region="West"] {
+	fill: #20BDBE;
+}
+[region="West"]:hover {
+	cursor: pointer;
+	fill: #00AB95;
+}
+
