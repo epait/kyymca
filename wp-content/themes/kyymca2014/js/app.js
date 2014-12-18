@@ -60,9 +60,14 @@ customizeTwitter = function() {
 };
 
 $(document).ready(function(){
-	$('.region-map-county').tooltip();
-	$('.region-map-county').on('show.bs.tooltip', function () {
-	  console.log('tooltip called');
-	})
+	if ($('.region-map-county')) {
+		$('.region-map-county').tooltip();
+
+		$('.region-map-county').on('click', function() {
+			var region = $(this).attr('region').toLowerCase();
+			$('.region-info').not($('#' + region)).toggle(false);
+			$('#' + region).toggle(true);
+		});
+	}
 	customizeTwitter();
 });

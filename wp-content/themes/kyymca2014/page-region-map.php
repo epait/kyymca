@@ -149,11 +149,26 @@ Template Name: KY Region Map
 								<path stroke="#fff" stroke-width="30" stroke-mitterlimit="10" class="region-map-county" data-container="body" region="Central" fill="#fcaf17" title="Woodford" d="M 7371,-8490 l 16,5 5,30 -21,20 -36,0 -20,35 31,20 61,-5 26,66 26,35 46,30 36,5 25,-60 108,-31 31,30 0,61 -15,30 77,15 41,-10 0,-25 -72,-35 10,-71 46,-35 -5,65 67,35 51,-10 36,-30 46,0 62,25 10,20 -15,81 -26,5 -31,-35 -15,30 15,35 -5,45 51,-20 41,-5 36,40 -5,25 -87,-15 0,61 36,50 77,-10 -26,55 -36,36 -15,60 62,10 66,121 -10,35 -15,5 -52,-70 -20,40 -77,25 0,40 31,46 220,-41 -276,1102 -20,156 -425,1575 -92,0 -123,56 -88,70 -143,46 -36,-10 -77,-91 0,-60 20,-50 98,-36 15,-40 -61,-96 -11,-95 -31,-15 -87,10 -20,-20 5,-61 56,-55 10,-30 -46,-30 -31,10 -66,95 -21,121 -35,10 -31,-25 -16,-85 62,-151 -11,-61 -56,-30 -103,71 -41,10 -71,-50 15,-81 36,-40 82,-46 108,-20 20,-20 0,-20 -82,-80 -103,-10 -20,-51 20,-50 93,-35 97,-86 20,-30 -25,-30 -62,-20 -92,5 -41,-30 -46,-91 20,-70 46,-86 0,-30 -41,-35 -149,-66 0,-60 67,-91 -10,-100 -26,-35 -118,-81 -21,-35 5,-50 31,-36 139,0 30,-30 5,-40 -20,-35 -92,-35 -41,-56 133,-136 -11,-95 -56,-81 -46,-25 -128,111 -52,-5 -41,-91 5,-196 16,-40 -26,-136 10,-95 z" />
 								</g>
 							</svg>
-							<?php the_field('metro_region') ?> <!-- Red -->
-							<?php the_field('north_region') ?> <!-- Purple -->
-							<?php the_field('east_region') ?> <!-- Blue -->
-							<?php the_field('central_region') ?> <!-- Orange -->
-							<?php the_field('west_region') ?> <!-- Green -->
+							<div class="region-info" id="metro" style="display:none;">
+								<h4>Metro Region</h4>
+								<?php the_field('metro_region') ?>
+							</div>
+							<div class="region-info" id="north" style="display:none;">
+								<h4>North Region</h4>
+								<?php the_field('north_region') ?>
+							</div>
+							<div class="region-info" id="east" style="display:none;">
+								<h4>East Region</h4>
+								<?php the_field('east_region') ?>
+							</div>
+							<div class="region-info" id="central" style="display:none;">
+								<h4>Central Region</h4>
+								<?php the_field('central_region') ?>
+							</div>
+							<div class="region-info" id="west" style="display:none;">
+								<h4>West Region</h4>
+								<?php the_field('west_region') ?> 
+							</div>
 	            		<?php endwhile; ?>
 	            	<?php endif; ?>
 	            </div>

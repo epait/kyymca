@@ -992,6 +992,10 @@ i.footer-icon {
 
 
 /*Region Map*/
+.region-info {
+	margin-top: 20px;
+}
+
 [region="Metro"] {
 	fill: #f15922;
 }
