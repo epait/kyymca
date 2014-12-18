@@ -3,10 +3,13 @@
 Plugin Name: WP Google Maps - Gold Add-on
 Plugin URI: http://www.wpgmaps.com
 Description: This is the Gold add-on for WP Google Maps. This enables mass-marker support and advanced map styling through the wizard.
-Version: 3.24
+Version: 3.25
 Author: WP Google Maps
 Author URI: http://www.wpgmaps.com
  *
+ * 3.25
+ * Added support for the new marker pull method
+ * 
  * 3.24
  * Approving of VGM markers bug fixed
  * 
@@ -161,7 +164,7 @@ global $wpgmza_gold_version;
 global $wpgmza_t;
 global $wpgmza_p;
 global $wpgmza_g;
-$wpgmza_gold_version = "3.24";
+$wpgmza_gold_version = "3.25";
 $wpgmza_gold_string = "gold";
 $wpgmza_p = true;
 $wpgmza_g = true;
@@ -353,8 +356,10 @@ function wpgmaps_admin_javascript_gold() {
                                 marker_id: cur_id
                         };
                         jQuery.post(ajaxurl, data, function(response) {
+                                returned_data = JSON.parse(response);
+                                db_marker_array = JSON.stringify(returned_data.marker_data);
                                 wpgmza_InitMap();
-                                jQuery("#wpgmza_marker_holder").html(response);
+                                jQuery("#wpgmza_marker_holder").html(JSON.parse(response).table_html);
                                 wpgmza_reinitialisetbl();
                         });
 
@@ -382,13 +387,18 @@ function wpgmaps_admin_javascript_gold() {
                         var cur_id = jQuery(this).attr("id");
 
                         var wpgmza_edit_title = jQuery("#wpgmza_hid_marker_title_"+cur_id).val();
-                        var wpgmza_edit_address = jQuery("#wpgmza_hid_marker_address_"+cur_id).val();
+                        wpgmza_edit_address = jQuery("#wpgmza_hid_marker_address_"+cur_id).val();
+                        wpgmza_edit_lat = jQuery("#wpgmza_hid_marker_lat_"+cur_id).val();
+                        wpgmza_edit_lng = jQuery("#wpgmza_hid_marker_lng_"+cur_id).val();
+                        
+                        
                         var wpgmza_edit_desc = jQuery("#wpgmza_hid_marker_desc_"+cur_id).val();
                         var wpgmza_edit_pic = jQuery("#wpgmza_hid_marker_pic_"+cur_id).val();
                         var wpgmza_edit_link = jQuery("#wpgmza_hid_marker_link_"+cur_id).val();
                         var wpgmza_edit_icon = jQuery("#wpgmza_hid_marker_icon_"+cur_id).val();
                         var wpgmza_edit_anim = jQuery("#wpgmza_hid_marker_anim_"+cur_id).val();
                         var wpgmza_edit_category = jQuery("#wpgmza_hid_marker_category_"+cur_id).val();
+                        var wpgmza_edit_retina = jQuery("#wpgmza_hid_marker_retina_"+cur_id).val();
                         var wpgmza_edit_infoopen = jQuery("#wpgmza_hid_marker_infoopen_"+cur_id).val();
                         jQuery("#wpgmza_edit_id").val(cur_id);
                         jQuery("#wpgmza_add_title").val(wpgmza_edit_title);
@@ -397,10 +407,27 @@ function wpgmaps_admin_javascript_gold() {
                         jQuery("#wpgmza_add_pic").val(wpgmza_edit_pic);
                         jQuery("#wpgmza_link_url").val(wpgmza_edit_link);
                         jQuery("#wpgmza_animation").val(wpgmza_edit_anim);
-                        jQuery("#wpgmza_category").val(wpgmza_edit_category);
+                        
+                        jQuery('input[name=wpgmza_add_retina]').removeAttr('checked');
+                        console.log(wpgmza_edit_retina);
+                        if (wpgmza_edit_retina === 0 || wpgmza_edit_retina === "0") { } else {
+                            jQuery("#wpgmza_add_retina").prop('checked', true);
+                        }
+
+                        var cat_array = wpgmza_edit_category.split(",");
+                        jQuery('input[name=wpgmza_cat_checkbox]').removeAttr('checked');
+                        cat_array.forEach(function(entry) {
+                            if (entry === 0) { } else {
+                                jQuery("#wpgmza_cat_checkbox_"+entry).prop('checked', true);
+                            }
+                        });
+                        
                         jQuery("#wpgmza_infoopen").val(wpgmza_edit_infoopen);
                         jQuery("#wpgmza_add_custom_marker").val(wpgmza_edit_icon);
-                        jQuery("#wpgmza_cmm").html("<img src='"+wpgmza_edit_icon+"' />");
+                        if (wpgmza_edit_icon != "")
+                          jQuery("#wpgmza_cmm").html("<img src='"+wpgmza_edit_icon+"' />");
+                        else
+                          jQuery("#wpgmza_cmm").html("&nbsp;"); 
                         jQuery("#wpgmza_addmarker_div").hide();
                         jQuery("#wpgmza_editmarker_div").show();
 
@@ -455,9 +482,10 @@ function wpgmaps_admin_javascript_gold() {
                         var wpgm_link = "0";
                         var wpgm_icon = "0";
                         var wpgm_gps = "0";
-                        var wpgm_category = "0";
 
                         var wpgm_anim = "0";
+                        var wpgm_category = "0";
+                        var wpgm_retina = "0";
                         var wpgm_infoopen = "0";
                         var wpgm_map_id = "0";
                         if (document.getElementsByName("wpgmza_add_title").length > 0) { wpgm_title = jQuery("#wpgmza_add_title").val(); }
@@ -467,74 +495,129 @@ function wpgmaps_admin_javascript_gold() {
                         if (document.getElementsByName("wpgmza_link_url").length > 0) { wpgm_link = jQuery("#wpgmza_link_url").val(); }
                         if (document.getElementsByName("wpgmza_add_custom_marker").length > 0) { wpgm_icon = jQuery("#wpgmza_add_custom_marker").val(); }
                         if (document.getElementsByName("wpgmza_animation").length > 0) { wpgm_anim = jQuery("#wpgmza_animation").val(); }
+                        
+                        var Checked = jQuery('input[name="wpgmza_add_retina"]:checked').length > 0;
+                        console.log("CHECKED"+Checked);
+                        if (Checked) { wpgm_retina = "1"; } else { wpgm_retina = "0"; }
+
                         if (document.getElementsByName("wpgmza_category").length > 0) { wpgm_category = jQuery("#wpgmza_category").val(); }
+                        
+                    
                         var checkValues = jQuery('input[name=wpgmza_cat_checkbox]:checked').map(function() {
                             return jQuery(this).val();
                         }).get();
                         if (checkValues.length > 0) { wpgm_category = checkValues; }
                         wpgm_category.toString();
                         
-                    
-                        
                         
                         if (document.getElementsByName("wpgmza_infoopen").length > 0) { wpgm_infoopen = jQuery("#wpgmza_infoopen").val(); }
                         if (document.getElementsByName("wpgmza_id").length > 0) { wpgm_map_id = jQuery("#wpgmza_id").val(); }
+                        /* first check if user has added a GPS co-ordinate */
+                        checker = wpgm_address.split(",");
+                        var wpgm_lat = "";
+                        var wpgm_lng = "";
+                        wpgm_lat = checker[0];
+                        wpgm_lng = checker[1];
+                        checker1 = parseFloat(checker[0]);
+                        checker2 = parseFloat(checker[1]);
+                        if ((wpgm_lat.match(/[a-zA-Z]/g) === null && wpgm_lng.match(/[a-zA-Z]/g) === null) && checker.length === 2 && (checker1 != NaN && (checker1 <= 90 || checker1 >= -90)) && (checker2 != NaN && (checker2 <= 90 || checker2 >= -90))) {
+                            var data = {
+                                action: 'add_marker',
+                                security: '<?php echo $ajax_nonce; ?>',
+                                map_id: wpgm_map_id,
+                                title: wpgm_title,
+                                address: wpgm_address,
+                                desc: wpgm_desc,
+                                link: wpgm_link,
+                                icon: wpgm_icon,
+                                retina: wpgm_retina,
+                                pic: wpgm_pic,
+                                anim: wpgm_anim,
+                                category: wpgm_category,
+                                infoopen: wpgm_infoopen,
+                                lat: wpgm_lat,
+                                lng: wpgm_lng
+                            };
 
-                        geocoder.geocode( { 'address': wpgm_address}, function(results, status) {
-                            if (status == google.maps.GeocoderStatus.OK) {
-                                wpgm_gps = String(results[0].geometry.location);
-                                var latlng1 = wpgm_gps.replace("(","");
-                                var latlng2 = latlng1.replace(")","");
-                                var latlngStr = latlng2.split(",",2);
-                                var wpgm_lat = parseFloat(latlngStr[0]);
-                                var wpgm_lng = parseFloat(latlngStr[1]);
+
+                            jQuery.post(ajaxurl, data, function(response) {
+                                    returned_data = JSON.parse(response);
+                                    db_marker_array = JSON.stringify(returned_data.marker_data);
+                                    wpgmza_InitMap();
+                                    jQuery("#wpgmza_marker_holder").html(JSON.parse(response).table_html);
+                                    jQuery("#wpgmza_addmarker").show();
+                                    jQuery("#wpgmza_addmarker_loading").hide();
+
+                                    jQuery("#wpgmza_add_title").val("");
+                                    jQuery("#wpgmza_add_address").val("");
+                                    jQuery("#wpgmza_add_desc").val("");
+                                    jQuery("#wpgmza_add_pic").val("");
+                                    jQuery("#wpgmza_link_url").val("");
+                                    jQuery("#wpgmza_animation").val("0");
+                                    jQuery("#wpgmza_add_retina").attr('checked',false);
+                                    jQuery("#wpgmza_edit_id").val("");
+                                    jQuery('input[name=wpgmza_cat_checkbox]').attr('checked',false);
+                                    wpgmza_reinitialisetbl();
+                            });
+                            
+                            
+                        } else { 
+                            geocoder.geocode( { 'address': wpgm_address}, function(results, status) {
+                                if (status == google.maps.GeocoderStatus.OK) {
+                                    wpgm_gps = String(results[0].geometry.location);
+                                    var latlng1 = wpgm_gps.replace("(","");
+                                    var latlng2 = latlng1.replace(")","");
+                                    var latlngStr = latlng2.split(",",2);
+                                    var wpgm_lat = parseFloat(latlngStr[0]);
+                                    var wpgm_lng = parseFloat(latlngStr[1]);
+
+                                    var data = {
+                                        action: 'add_marker',
+                                        security: '<?php echo $ajax_nonce; ?>',
+                                        map_id: wpgm_map_id,
+                                        title: wpgm_title,
+                                        address: wpgm_address,
+                                        desc: wpgm_desc,
+                                        link: wpgm_link,
+                                        icon: wpgm_icon,
+                                        retina: wpgm_retina,
+                                        pic: wpgm_pic,
+                                        anim: wpgm_anim,
+                                        category: wpgm_category,
+                                        infoopen: wpgm_infoopen,
+                                        lat: wpgm_lat,
+                                        lng: wpgm_lng
+                                    };
 
 
-                                var data = {
-                                    action: 'add_marker',
-                                    security: '<?php echo $ajax_nonce; ?>',
-                                    map_id: wpgm_map_id,
-                                    title: wpgm_title,
-                                    address: wpgm_address,
-                                    desc: wpgm_desc,
-                                    link: wpgm_link,
-                                    icon: wpgm_icon,
-                                    pic: wpgm_pic,
-                                    anim: wpgm_anim,
-                                    category: wpgm_category,
-                                    infoopen: wpgm_infoopen,
-                                    lat: wpgm_lat,
-                                    lng: wpgm_lng
-                                };
-                                
+                                    jQuery.post(ajaxurl, data, function(response) {
+                                            returned_data = JSON.parse(response);
+                                            db_marker_array = JSON.stringify(returned_data.marker_data);
+                                            wpgmza_InitMap();
+                                            jQuery("#wpgmza_marker_holder").html(JSON.parse(response).table_html);
+                                            jQuery("#wpgmza_addmarker").show();
+                                            jQuery("#wpgmza_addmarker_loading").hide();
 
-                                jQuery.post(ajaxurl, data, function(response) {
-                                        wpgmza_InitMap();
-                                        jQuery("#wpgmza_marker_holder").html(response);
-                                        jQuery("#wpgmza_addmarker").show();
-                                        jQuery("#wpgmza_addmarker_loading").hide();
+                                            jQuery("#wpgmza_add_title").val("");
+                                            jQuery("#wpgmza_add_address").val("");
+                                            jQuery("#wpgmza_add_desc").val("");
+                                            jQuery("#wpgmza_add_pic").val("");
+                                            jQuery("#wpgmza_link_url").val("");
+                                            jQuery("#wpgmza_animation").val("0");
+                                            jQuery("#wpgmza_add_retina").attr('checked',false);
+                                            jQuery("#wpgmza_edit_id").val("");
+                                            jQuery('input[name=wpgmza_cat_checkbox]').attr('checked',false);
+                                            wpgmza_reinitialisetbl();
+                                    });
 
-                                        jQuery("#wpgmza_add_title").val("");
-                                        jQuery("#wpgmza_add_address").val("");
-                                        jQuery("#wpgmza_add_desc").val("");
-                                        jQuery("#wpgmza_add_pic").val("");
-                                        jQuery("#wpgmza_link_url").val("");
-                                        jQuery("#wpgmza_animation").val("0");
-                                        jQuery("#wpgmza_category").val("0");
-                                        jQuery("#wpgmza_edit_id").val("");
-                                        wpgmza_reinitialisetbl();
-                                });
-
-                            } else {
-                                alert("<?php _e("Geocode was not successful for the following reason","wp-google-maps"); ?>: " + status);
-                            }
-                        });
-
+                                } else {
+                                    alert("<?php _e("Geocode was not successful for the following reason","wp-google-maps"); ?>: " + status);
+                                }
+                            });
+                        }
 
 
                     });
-
-
                     jQuery("#wpgmza_editmarker").click(function(){
 
                         jQuery("#wpgmza_editmarker_div").hide();
@@ -543,8 +626,8 @@ function wpgmaps_admin_javascript_gold() {
 
                         var wpgm_edit_id;
                         wpgm_edit_id = parseInt(jQuery("#wpgmza_edit_id").val());
+                        var wpgm_title = "";
                         var wpgm_address = "0";
-                        var wpgm_title = "0";
                         var wpgm_desc = "0";
                         var wpgm_pic = "0";
                         var wpgm_link = "0";
@@ -552,6 +635,7 @@ function wpgmaps_admin_javascript_gold() {
                         var wpgm_category = "0";
                         var wpgm_infoopen = "0";
                         var wpgm_icon = "";
+                        var wpgm_retina = "0";
                         var wpgm_map_id = "0";
                         var wpgm_gps = "0";
                         if (document.getElementsByName("wpgmza_add_title").length > 0) { wpgm_title = jQuery("#wpgmza_add_title").val(); }
@@ -561,6 +645,11 @@ function wpgmaps_admin_javascript_gold() {
                         if (document.getElementsByName("wpgmza_link_url").length > 0) { wpgm_link = jQuery("#wpgmza_link_url").val(); }
                         if (document.getElementsByName("wpgmza_animation").length > 0) { wpgm_anim = jQuery("#wpgmza_animation").val(); }
                         if (document.getElementsByName("wpgmza_category").length > 0) { wpgm_category = jQuery("#wpgmza_category").val(); }
+                        var Checked = jQuery('input[name="wpgmza_add_retina"]:checked').length > 0;
+                        console.log("CHECKED"+Checked);
+                        if (Checked) { wpgm_retina = "1"; } else { wpgm_retina = "0"; }
+                        
+                        
                         var checkValues = jQuery('input[name=wpgmza_cat_checkbox]:checked').map(function() {
                             return jQuery(this).val();
                         }).get();
@@ -569,7 +658,20 @@ function wpgmaps_admin_javascript_gold() {
                         if (document.getElementsByName("wpgmza_infoopen").length > 0) { wpgm_infoopen = jQuery("#wpgmza_infoopen").val(); }
                         if (document.getElementsByName("wpgmza_add_custom_marker").length > 0) { wpgm_icon = jQuery("#wpgmza_add_custom_marker").val(); }
                         if (document.getElementsByName("wpgmza_id").length > 0) { wpgm_map_id = jQuery("#wpgmza_id").val(); }
-                        
+
+
+                        var do_geocode;
+                        if (wpgm_address === wpgmza_edit_address) {
+                            do_geocode = false;
+                            var wpgm_lat = wpgmza_edit_lat;
+                            var wpgm_lng = wpgmza_edit_lng;
+                        } else { 
+                            do_geocode = true;
+                        }
+
+                        if (do_geocode === true) {
+
+
                         geocoder.geocode( { 'address': wpgm_address}, function(results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
                                 wpgm_gps = String(results[0].geometry.location);
@@ -589,6 +691,7 @@ function wpgmaps_admin_javascript_gold() {
                                         lat: wpgm_lat,
                                         lng: wpgm_lng,
                                         icon: wpgm_icon,
+                                        retina: wpgm_retina,
                                         desc: wpgm_desc,
                                         link: wpgm_link,
                                         pic: wpgm_pic,
@@ -598,8 +701,10 @@ function wpgmaps_admin_javascript_gold() {
                                 };
 
                                 jQuery.post(ajaxurl, data, function(response) {
+                                    returned_data = JSON.parse(response);
+                                    db_marker_array = JSON.stringify(returned_data.marker_data);
                                     wpgmza_InitMap();
-                                    jQuery("#wpgmza_marker_holder").html(response);
+                                    jQuery("#wpgmza_marker_holder").html(JSON.parse(response).table_html);
                                     jQuery("#wpgmza_addmarker_div").show();
                                     jQuery("#wpgmza_editmarker_loading").hide();
                                     jQuery("#wpgmza_add_title").val("");
@@ -608,9 +713,10 @@ function wpgmaps_admin_javascript_gold() {
                                     jQuery("#wpgmza_add_pic").val("");
                                     jQuery("#wpgmza_link_url").val("");
                                     jQuery("#wpgmza_edit_id").val("");
+                                    jQuery("#wpgmza_add_retina").attr('checked',false);
                                     jQuery("#wpgmza_animation").val("None");
-                                    jQuery("#wpgmza_category").val("Select");
                                     jQuery("#wpgmza_cmm").html("");
+                                    jQuery('input[name=wpgmza_cat_checkbox]').attr('checked',false);
                                     wpgmza_reinitialisetbl();
                                 });
 
@@ -618,6 +724,48 @@ function wpgmaps_admin_javascript_gold() {
                                 alert("<?php _e("Geocode was not successful for the following reason","wp-google-maps"); ?>: " + status);
                             }
                         });
+                        } else {
+                            /* address was the same, no need for geocoding */
+                            var data = {
+                                action: 'edit_marker',
+                                security: '<?php echo $ajax_nonce; ?>',
+                                map_id: wpgm_map_id,
+                                edit_id: wpgm_edit_id,
+                                title: wpgm_title,
+                                address: wpgm_address,
+                                lat: wpgm_lat,
+                                lng: wpgm_lng,
+                                icon: wpgm_icon,
+                                retina: wpgm_retina,
+                                desc: wpgm_desc,
+                                link: wpgm_link,
+                                pic: wpgm_pic,
+                                anim: wpgm_anim,
+                                category: wpgm_category,
+                                infoopen: wpgm_infoopen
+                            };
+
+                            jQuery.post(ajaxurl, data, function(response) {
+                                returned_data = JSON.parse(response);
+                                db_marker_array = JSON.stringify(returned_data.marker_data);
+                                wpgmza_InitMap();
+                                jQuery("#wpgmza_marker_holder").html(JSON.parse(response).table_html);
+                                jQuery("#wpgmza_addmarker_div").show();
+                                jQuery("#wpgmza_editmarker_loading").hide();
+                                jQuery("#wpgmza_add_title").val("");
+                                jQuery("#wpgmza_add_address").val("");
+                                jQuery("#wpgmza_add_desc").val("");
+                                jQuery("#wpgmza_add_pic").val("");
+                                jQuery("#wpgmza_link_url").val("");
+                                jQuery("#wpgmza_add_retina").attr('checked',false);
+                                jQuery("#wpgmza_edit_id").val("");
+                                jQuery("#wpgmza_animation").val("None");
+                                jQuery("#wpgmza_category").val("Select");
+                                jQuery("#wpgmza_cmm").html("");
+                                jQuery('input[name=wpgmza_cat_checkbox]').attr('checked',false);
+                                wpgmza_reinitialisetbl();
+                            });
+                        }
 
 
 
