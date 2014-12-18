@@ -57,7 +57,12 @@ customizeTwitter = function() {
 		twitterFeed.find('.e-entry-title a').css('color', linkColor);
 		twitterFeed.find('.retweet-credit').css('font-family','Verdana');
 	},1500);
-}
+};
+
 $(document).ready(function(){
+	$('.region-map-county').tooltip();
+	$('.region-map-county').on('show.bs.tooltip', function () {
+	  console.log('tooltip called');
+	})
 	customizeTwitter();
 });
