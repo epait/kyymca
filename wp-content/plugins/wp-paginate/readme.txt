@@ -2,8 +2,8 @@
 Contributors: StudioFuel, emartin24
 Tags: paginate, pagination, navigation, page, wp-paginate, comments, rtl, seo, usability
 Requires at least: 2.6.0 (2.7.0 for comments pagination)
-Tested up to: 4.0.1
-Stable tag: 1.3
+Tested up to: 4.1
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -152,6 +152,10 @@ This allows you to use the `.wp-paginate-comments` styles, already in `wp-pagina
 N/A
 
 == Changelog ==
+
+= 1.3.1 =
+* Fixed bug that prevented a wp-paginate.css stylesheet from loading from a child theme (reported by sunamumaya)
+* Tested plugin against WordPress 4.1
 
 = 1.3 =
 * Plugin ownership transfered to Studio Fuel (http://studiofuel.com) - no functional changes were made

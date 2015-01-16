@@ -3,7 +3,7 @@
 Plugin Name: WP-Paginate
 Plugin URI: http://www.studiofuel.com/wp-paginate/
 Description: A simple and flexible pagination plugin for WordPress posts and comments.
-Version: 1.3
+Version: 1.3.1
 Author: Noah Cinquini
 Author URI: http://www.studiofuel.com
 */
@@ -44,7 +44,7 @@ if (!class_exists('WPPaginate')) {
 		/**
 		 * @var string The plugin version
 		 */
-		var $version = '1.3';
+		var $version = '1.3.1';
 
 		/**
 		 * @var string The options string name for this plugin
@@ -201,8 +201,9 @@ if (!class_exists('WPPaginate')) {
 
 		function wp_paginate_css() {
 			$name = "wp-paginate.css";
-			if (false !== @file_exists(TEMPLATEPATH . "/$name")) {
-				$css = get_template_directory_uri() . "/$name";
+
+			if (false !== @file_exists(STYLESHEETPATH . "/$name")) {
+				$css = get_stylesheet_directory_uri() . "/$name";
 			}
 			else {
 				$css = $this->pluginurl . $name;
@@ -211,8 +212,8 @@ if (!class_exists('WPPaginate')) {
 
 			if (function_exists('is_rtl') && is_rtl()) {
 				$name = "wp-paginate-rtl.css";
-				if (false !== @file_exists(TEMPLATEPATH . "/$name")) {
-					$css = get_template_directory_uri() . "/$name";
+				if (false !== @file_exists(STYLESHEETPATH . "/$name")) {
+					$css = get_stylesheet_directory_uri() . "/$name";
 				}
 				else {
 					$css = $this->pluginurl . $name;

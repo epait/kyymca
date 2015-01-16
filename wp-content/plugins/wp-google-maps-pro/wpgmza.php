@@ -6,9 +6,7 @@
  */
 class wpgmza {
     
-    function list_markers($admin = false,$type = 1,$map_id = false,$category_data = false,$mashup = false,$mashup_ids = false,$marker_array = false) {
-        
-        
+    function list_markers($admin = false,$type = 1,$map_id = false,$category_data = false,$mashup = false,$mashup_ids = false,$marker_array = false,$order_by = false,$order = false) {
         
         global $wpdb;
         global $wpgmza_tblname;
@@ -44,12 +42,29 @@ class wpgmza {
 
         } else {
             
-            
+            if ($order_by && $order) {
+                if ($order_by == "1") { $order_by = "id"; }
+                else if ($order_by == "2") { $order_by = "title"; }
+                else if ($order_by == "3") { $order_by = "address"; }
+                else if ($order_by == "4") { $order_by = "description"; }
+                else if ($order_by == "5") { $order_by = "category"; }
+                else { $order_by = "id"; }
+                if ($order == "1") { $order_choice = "ASC"; }
+                else { $order_choice = "DESC"; }
+                
+                $wpgmza_sql1 = "
+                SELECT *
+                FROM $wpgmza_tblname
+                WHERE `map_id` = '$map_id' ORDER BY `$order_by` $order_choice
+                ";
+                
+            } else {
             $wpgmza_sql1 = "
                 SELECT *
                 FROM $wpgmza_tblname
                 WHERE `map_id` = '$map_id' ORDER BY `id` DESC
                 ";
+            }
         }
 
         $marker_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $wpgmza_tblname WHERE map_id = %d",$map_id ) );

@@ -3,11 +3,14 @@
 Plugin Name: WP Google Maps - Pro Add-on
 Plugin URI: http://www.wpgmaps.com
 Description: This is the Pro add-on for WP Google Maps. The Pro add-on enables you to add descriptions, pictures, links and custom icons to your markers as well as allows you to download your markers to a CSV file for quick editing and re-upload them when complete.
-Version: 5.46
+Version: 5.47
 Author: WP Google Maps
 Author URI: http://www.wpgmaps.com
  
  
+ * 5.47
+ * Fixed the marker ordering bug for the basic table
+ * 
  * 5.46
  * Introduced a new method of pulling and displaying the marker data
  * 
@@ -390,7 +393,7 @@ Author URI: http://www.wpgmaps.com
 //error_reporting(E_ERROR);
 global $wpgmza_pro_version;
 global $wpgmza_pro_string;
-$wpgmza_pro_version = "5.46";
+$wpgmza_pro_version = "5.47";
 $wpgmza_pro_string = "pro";
 
 global $wpgmza_current_map_cat_selection;
@@ -1797,10 +1800,10 @@ function wpgmaps_tag_pro( $atts ) {
         else if ($map_other_settings['list_markers_by'] == "1") {
             if ($wpgmza_current_mashup) {
                 $wpgmc = new wpgmza();
-                $wpgmza_marker_list_output .= $wpgmc->list_markers(false,1,$wpgmza_mashup_parent_id,false,true,$wpgmza_mashup_ids);
+                $wpgmza_marker_list_output .= $wpgmc->list_markers(false,1,$wpgmza_mashup_parent_id,false,true,$wpgmza_mashup_ids,false,$res->order_markers_by,$res->order_markers_choice);
             } else {
                 $wpgmc = new wpgmza();
-                $wpgmza_marker_list_output .= $wpgmc->list_markers(false,1,$wpgmza_current_map_id,false);
+                $wpgmza_marker_list_output .= $wpgmc->list_markers(false,1,$wpgmza_current_map_id,false,false,false,false,$res->order_markers_by,$res->order_markers_choice);
             }
            
         }
@@ -3651,8 +3654,8 @@ function wpgmaps_admin_javascript_pro() {
 
                             <?php if ($wpgmza_open_infowindow_by == '2') { ?>
                             google.maps.event.addListener(marker, 'mouseover', function() {
-                                infoWindow.close();
-                                infoWindow.setContent(html);
+                                infoWindow.close(); 
+                               infoWindow.setContent(html);
                                 infoWindow.open(MYMAP.map, marker);
 
                             });
