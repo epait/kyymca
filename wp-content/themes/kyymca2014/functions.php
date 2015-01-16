@@ -104,6 +104,8 @@ function register_my_menus() {
 
       'kya-menu-4' => __( 'KYA Sidebar 4' ),
 
+      'kya-menu-5' => __( 'KYA Sidebar 5' ),
+
       'kya-hs-1-menu' => __( 'KYA HS 1' ),
 
       'kya-hs-2-menu' => __( 'KYA HS 2' ),
