@@ -49,6 +49,11 @@ Template Name: KUNA Page
 								<?php } ?>
 		            			<?php wp_nav_menu( array( 'theme_location' => 'kuna-menu-4', 'menu_class' => 'sidebar-menu' ) ); ?>
 
+		            			<?php $section5 = get_field('sidebar_title_5'); if ($section5 != NULL) { ?>
+									<br /><h4 class="sidebar-title"><?php the_field('sidebar_title_5'); ?></h4>
+								<?php } ?>
+		            			<?php wp_nav_menu( array( 'theme_location' => 'kuna-menu-5', 'menu_class' => 'sidebar-menu' ) ); ?>
+
 		            			<?php $sidebarContent = get_field('sidebar_content'); if ($sidebarContent != NULL) { ?>
 	            					</br><?php the_field('sidebar_content') ?>
 	            				<?php } ?>

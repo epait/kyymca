@@ -84,6 +84,8 @@ function register_my_menus() {
 
       'kuna-menu-4' => __( 'KUNA Sidebar 4' ),
 
+      'kuna-menu-5' => __( 'KUNA Sidebar 5' ),
+
       'kuna-hs-1-menu' => __( 'KUNA HS 1' ),
 
       'kuna-hs-2-menu' => __( 'KUNA HS 2' ),
