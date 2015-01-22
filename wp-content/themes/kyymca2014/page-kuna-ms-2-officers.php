@@ -44,7 +44,6 @@ Template Name: MS KUNA 2 Officer
 									        	<a class="officer-name" href='<?php the_sub_field('page_link'); ?>'><?php the_sub_field('name'); ?></a><br />
 									        	<span class="officer-position"><?php the_sub_field('position'); ?></span><br />
 									        	<span class="officer-school"><?php the_sub_field('school'); ?></span><br />
-									        	<span class="officer-email"><a href="mailto:<?php the_sub_field('email'); ?>"><?php the_sub_field('email'); ?></a></span><br />
 									       	</div> 
 									    <?php endwhile; ?>
 									    <br />
