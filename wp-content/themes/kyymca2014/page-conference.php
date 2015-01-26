@@ -24,10 +24,6 @@ Template Name: Conference Page
 	            	<div class="row-fluid">
 	            		<div class="col-sm-4">
 	            			<div class="sidebar">
-	            				<?php $image = get_field('sidebar_image'); if ( $image != NULL ) { ?>
-										<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
-	            				<br />
-	            				<?php } ?>
 	            				<h4 class="sidebar-title"><?php the_field('conference_date') ?></h4>
 	            				<div class="sidebar-subtitle"><?php the_field('conference_location') ?></div>
 	            				<?php $sidebarTitle = get_field('sidebar_title'); if ($sidebarTitle != NULL) { ?>
