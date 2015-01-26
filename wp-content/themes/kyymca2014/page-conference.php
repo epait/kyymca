@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: MS KUNA 1 Officer
+Template Name: Conference Page
 */
 ?>
 <!-- Main Content -->
@@ -31,14 +31,14 @@ Template Name: MS KUNA 1 Officer
 	            				<h4 class="sidebar-title"><?php the_field('sidebar_title') ?></h4>
 	            				<div class="sidebar-subtitle"><?php the_field('sidebar_subtitle') ?></div>
 	            				<?php
-	            					wp_nav_menu( array( 'theme_location' => 'kuna-ms-1-menu', 'menu_class' => 'sidebar-menu' ) );
+	            					wp_nav_menu( array( 'theme_location' => 'kya-ms-4-menu', 'menu_class' => 'sidebar-menu' ) );
 									// check if the repeater field has rows of data
-									if( have_rows('ms_kuna_1_officers', 'option') ): ?>
+									if( have_rows('ms_kya_4_officers', 'option') ): ?>
 										<br />
 										<h4 class="sidebar-title">Presiding Officers</h4>
 										<?php 
 									 	// loop through the rows of data
-									    while ( have_rows('ms_kuna_1_officers', 'option') ) : the_row();
+									    while ( have_rows('ms_kya_4_officers', 'option') ) : the_row();
 									        // display a sub field value ?> 
 									        <div class="national-officer">
 									        	<a class="officer-name" href='<?php the_sub_field('page_link'); ?>'><?php the_sub_field('name'); ?></a><br />
