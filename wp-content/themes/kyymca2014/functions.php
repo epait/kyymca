@@ -86,16 +86,6 @@ function register_my_menus() {
 
       'kuna-menu-5' => __( 'KUNA Sidebar 5' ),
 
-      'kuna-hs-1-menu' => __( 'KUNA HS 1' ),
-
-      'kuna-hs-2-menu' => __( 'KUNA HS 2' ),
-
-      'kuna-ms-1-menu' => __( 'KUNA MS 1' ),
-
-      'kuna-ms-2-menu' => __( 'KUNA MS 2' ),
-
-      'kuna-ms-3-menu' => __( 'KUNA MS 3' ),
-
       'kya-menu' => __( 'KYA Sidebar 1' ),
 
       'kya-menu-2' => __( 'KYA Sidebar 2' ),
@@ -105,20 +95,6 @@ function register_my_menus() {
       'kya-menu-4' => __( 'KYA Sidebar 4' ),
 
       'kya-menu-5' => __( 'KYA Sidebar 5' ),
-
-      'kya-hs-1-menu' => __( 'KYA HS 1' ),
-
-      'kya-hs-2-menu' => __( 'KYA HS 2' ),
-
-      'kya-hs-3-menu' => __( 'KYA HS 3' ),
-
-      'kya-ms-1-menu' => __( 'KYA MS 1' ),
-
-      'kya-ms-2-menu' => __( 'KYA MS 2' ),
-
-      'kya-ms-3-menu' => __( 'KYA MS 3' ),
-
-      'kya-ms-4-menu' => __( 'KYA MS 4' ),
 
       'ltc-menu' => __( 'LTC' ),
 

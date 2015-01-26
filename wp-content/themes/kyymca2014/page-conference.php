@@ -31,11 +31,10 @@ Template Name: Conference Page
 	            				<h4 class="sidebar-title"><?php the_field('sidebar_title') ?></h4>
 	            				<div class="sidebar-subtitle"><?php the_field('sidebar_subtitle') ?></div>
 	            				<?php
-	            					wp_nav_menu( array( 'theme_location' => 'kya-ms-4-menu', 'menu_class' => 'sidebar-menu' ) );
 									// check if the repeater field has rows of data
-									if( have_rows('ms_kya_4_officers', 'option') ): ?>
+									if( have_rows('officers') ): ?>
 										<br />
-										<h4 class="sidebar-title">Presiding Officers</h4>
+										<h4 class="sidebar-title"><?php the_field('officers_title') ?></h4>
 										<?php 
 									 	// loop through the rows of data
 									    while ( have_rows('ms_kya_4_officers', 'option') ) : the_row();
