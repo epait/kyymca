@@ -332,11 +332,7 @@ function my_options_page_settings( $options )
 
       __('Footer'),
 
-      __('Staff'),
-
-      __('KUNA Officers'),
-
-      __('KYA Officers')
+      __('Staff')
 
     );
 
