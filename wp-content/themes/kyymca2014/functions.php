@@ -384,6 +384,11 @@ function set_default_admin_color($user_id) {
 }
 add_action('user_register', 'set_default_admin_color');
 
+function change_admin_color($result) {
+    return 'ymca';
+}
+add_filter('get_user_option_admin_color', 'change_admin_color');
+
 
 function add_favicon() {
     $theme_color = get_field('theme_color', 'option');
