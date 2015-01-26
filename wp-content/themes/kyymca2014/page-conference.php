@@ -28,8 +28,11 @@ Template Name: Conference Page
 										<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
 	            				<br />
 	            				<?php } ?>
-	            				<h4 class="sidebar-title"><?php the_field('sidebar_title') ?></h4>
-	            				<div class="sidebar-subtitle"><?php the_field('sidebar_subtitle') ?></div>
+	            				<h4 class="sidebar-title"><?php the_field('conference_date') ?></h4>
+	            				<div class="sidebar-subtitle"><?php the_field('conference_location') ?></div>
+	            				<?php $sidebarTitle = get_field('sidebar_title'); if ($sidebarTitle != NULL) { ?>
+									<h4 class="sidebar-title"><?php the_field('sidebar_title') ?></h4>
+	            				<?php } the_field('sidebar_content') ?>
 	            				<?php
 									// check if the repeater field has rows of data
 									if( have_rows('officers') ): ?>
@@ -37,7 +40,7 @@ Template Name: Conference Page
 										<h4 class="sidebar-title"><?php the_field('officers_title') ?></h4>
 										<?php 
 									 	// loop through the rows of data
-									    while ( have_rows('ms_kya_4_officers', 'option') ) : the_row();
+									    while ( have_rows('officers') ) : the_row();
 									        // display a sub field value ?> 
 									        <div class="national-officer">
 									        	<a class="officer-name" href='<?php the_sub_field('page_link'); ?>'><?php the_sub_field('name'); ?></a><br />
@@ -50,7 +53,6 @@ Template Name: Conference Page
 									    // no rows found
 									endif; 
 								?>
-	            				<?php the_field('sidebar_content') ?>
 	            			</div>
 	            		</div>
 	            		<div class="col-sm-8">
