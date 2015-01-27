@@ -3,10 +3,16 @@
 Plugin Name: WP Google Maps - Gold Add-on
 Plugin URI: http://www.wpgmaps.com
 Description: This is the Gold add-on for WP Google Maps. This enables mass-marker support and advanced map styling through the wizard.
-Version: 3.25
+Version: 3.27
 Author: WP Google Maps
 Author URI: http://www.wpgmaps.com
  *
+ * 3.27 - Low priority update
+ * Changed update URL
+ * 
+ * 3.26
+ * Fixed approve marker bug
+ * 
  * 3.25
  * Added support for the new marker pull method
  * 
@@ -164,7 +170,7 @@ global $wpgmza_gold_version;
 global $wpgmza_t;
 global $wpgmza_p;
 global $wpgmza_g;
-$wpgmza_gold_version = "3.25";
+$wpgmza_gold_version = "3.27";
 $wpgmza_gold_string = "gold";
 $wpgmza_p = true;
 $wpgmza_g = true;
@@ -444,8 +450,10 @@ function wpgmaps_admin_javascript_gold() {
                                 marker_id: cur_id
                         };
                         jQuery.post(ajaxurl, data, function(response) {
+                                returned_data = JSON.parse(response);
+                                db_marker_array = JSON.stringify(returned_data.marker_data);
                                 wpgmza_InitMap();
-                                jQuery("#wpgmza_marker_holder").html(response);
+                                jQuery("#wpgmza_marker_holder").html(JSON.parse(response).table_html);
                                 wpgmza_reinitialisetbl();
 
                         });
@@ -1161,7 +1169,7 @@ function wpgmza_gold_addon_display() {
 }
 
 
-$wpgmaps_gold_api_url = 'http://wpgmaps.com/apid/';
+$wpgmaps_gold_api_url = 'http://ccplugins.co/apid-wpgmaps/';
 $wpgmaps_gold_plugin_slug = basename(dirname(__FILE__));
 
 // Take over the update check

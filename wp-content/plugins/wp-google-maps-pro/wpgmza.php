@@ -68,11 +68,14 @@ class wpgmza {
         }
 
         $marker_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $wpgmza_tblname WHERE map_id = %d",$map_id ) );
-        if ($marker_count > 5000) {
-            return __("There are too many markers to make use of the live edit function. The maximum amount for this functionality is 2000 markers. Anything more than that could crash your browser. In order to edit your markers, you would need to download the table in CSV format, edit it and re-upload it.","wp-google-maps");
-        } else {
-            $results = $wpdb->get_results($wpgmza_sql1);
-        }
+//        removed in 5.49 as it was showing up in the front end.
+//        =========================================================
+//        if ($marker_count > 5000) {
+//            return __("There are too many markers to make use of the live edit function. The maximum amount for this functionality is 2000 markers. Anything more than that could crash your browser. In order to edit your markers, you would need to download the table in CSV format, edit it and re-upload it.","wp-google-maps");
+//        } else {
+//            
+//        }
+        $results = $wpdb->get_results($wpgmza_sql1);
         
         
         

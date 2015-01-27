@@ -338,6 +338,8 @@ function wpgmaps_category_head() {
                     )
                     );
             } else {
+                
+                
                 foreach ($_POST['assigned_to_map'] as $assigned_map) {
 
                     $rows_affected = $wpdb->query( $wpdb->prepare(
