@@ -25,7 +25,7 @@ Template Name: Staff Page
 	            		<div class="col-sm-4">
 	            			<div class="sidebar">
 	            				<?php $image = get_field('sidebar_image'); if ( $image != NULL ) { ?>
-										<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+										<img class="sidebar-image" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
 	            				<br />
 	            				<?php } ?>
 	            				<?php
