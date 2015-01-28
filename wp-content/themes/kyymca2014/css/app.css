@@ -696,6 +696,9 @@ ul#menu-header.nav.navbar-nav {
 	margin: 0;
 	padding: 0 0 10px 0;
 }
+.sidebar-image {
+	margin-bottom: 15px;
+}
 .thumb {
 	padding-bottom: 15px;
 }
