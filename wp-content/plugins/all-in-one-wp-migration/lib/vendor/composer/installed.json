@@ -1,0 +1,130 @@
+[
+    {
+        "name": "bandar/bandar",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yani-/bandar.git",
+            "reference": "abbe1941651fb106cafca8459b5ad723b539e6eb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yani-/bandar/zipball/abbe1941651fb106cafca8459b5ad723b539e6eb",
+            "reference": "abbe1941651fb106cafca8459b5ad723b539e6eb",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "time": "2014-08-23 15:26:31",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Yani Iliev",
+                "email": "yani@iliev.me",
+                "homepage": "https://yani.iliev.me",
+                "role": "developer"
+            }
+        ],
+        "description": "Fully tested, super minimalistic PHP template engine for PHP 5.2, 5.3, 5.4, 5.5",
+        "homepage": "http://github.com/yani-/bandar",
+        "keywords": [
+            "engine",
+            "template",
+            "template engine"
+        ]
+    },
+    {
+        "name": "mysqldump-factory/mysqldump-factory",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yani-/mysqldump-factory.git",
+            "reference": "fee24ee4d90f5f401e621d4ac8c91cdb4864fad9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yani-/mysqldump-factory/zipball/fee24ee4d90f5f401e621d4ac8c91cdb4864fad9",
+            "reference": "fee24ee4d90f5f401e621d4ac8c91cdb4864fad9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.17"
+        },
+        "time": "2014-10-11 16:01:03",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Yani Iliev",
+                "email": "yani@iliev.me",
+                "homepage": "https://yani.iliev.me",
+                "role": "developer"
+            },
+            {
+                "name": "Bobby Angelov",
+                "email": "bobby@servmask.com",
+                "homepage": "https://servmask.com",
+                "role": "developer"
+            }
+        ],
+        "description": "Fully tested, mysqldump factory for PHP 5.2.17, 5.3, 5.4, 5.5",
+        "homepage": "http://github.com/yani-/mysqldump-factory",
+        "keywords": [
+            "mysqldump",
+            "pdodump"
+        ]
+    },
+    {
+        "name": "zip-factory/zip-factory",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yani-/zip-factory.git",
+            "reference": "30596615f4c3534c7938cdd38f9afe4d9ba4cd84"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yani-/zip-factory/zipball/30596615f4c3534c7938cdd38f9afe4d9ba4cd84",
+            "reference": "30596615f4c3534c7938cdd38f9afe4d9ba4cd84",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "time": "2014-11-11 19:51:43",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Yani Iliev",
+                "email": "yani@iliev.me",
+                "homepage": "https://yani.iliev.me",
+                "role": "developer"
+            }
+        ],
+        "description": "Factory class that creates either ZipArchive or PclZip PHP 5.2.17 and up",
+        "homepage": "http://github.com/yani-/zip-factory",
+        "keywords": [
+            "zip",
+            "ziparchive",
+            "zipfactory"
+        ]
+    }
+]

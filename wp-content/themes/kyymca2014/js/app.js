@@ -66,7 +66,16 @@ $(document).ready(function(){
 		$('.region-map-county').on('click', function() {
 			var region = $(this).attr('region').toLowerCase();
 			$('.region-info').not($('#' + region)).toggle(false);
-			$('#' + region).toggle(true);
+			$('#' + region).toggle(true, scrollToRegion());
+
+			function scrollToRegion() {
+				window.setTimeout(function() {
+					var headerOffset = $('#menu-header').height() + 15;
+					var offset = $('#' + region).offset();
+					window.scrollTo(0, offset.top - headerOffset);
+					console.log('scroll to ' + offset.top - headerOffset);
+				}, 100);
+			}
 		});
 	}
 	customizeTwitter();

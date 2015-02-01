@@ -3,7 +3,7 @@ Contributors: yani.iliev, bangelov, pimjitsawang
 Tags: db migration, migration, wordpress migration, db backup, db restore, website backup, website restore, website migration, website deploy, wordpress deploy, db backup, database export, database serialization, database find replace
 Requires at least: 3.3
 Tested up to: 4.0
-Stable tag: 2.0.4
+Stable tag: 2.1.0.7
 License: GPLv2 or later
 
 All-in-One WP Migration is the only tool that you will ever need to migrate a WordPress site.
@@ -15,35 +15,23 @@ You can apply unlimited find and replace operations on your database and the plu
 
 All in One WP Plugin is the first plugin to offer true mobile experience on WordPress versions 3.3 and up.
 
-= Not yet Multisite compatible =
-* Support for multisites is comming soon
-
-= Works on Windows OS and IIS =
-* Tested the plugin on Windows 7 and Windows Server 2012 with the default available IIS
-* You will need to make sure that Windows\TEMP folder has write permissions for the IIS user
-
-= memory_limit requirement of only 32MB =
-* The plugin handles archiving of files by using 2048 bytes of chunks
-* The plugin processes database find/replacement in chunks of 1MB
+= Works on all hosting providers =
+* The plugin doesn't depend on any extensions making it compatible with all PHP hosting providers
+* The plugin exports and imports data in time chunks of 3 seconds each which keeps the plugin below the max execution time that most providers set to 30 seconds.
+* We've tested the plugin on the major Linux distributions, OS X, and Microsoft Windows.
 
 = Bypass all upload size restriction =
 * We use chunks to import your data and that way we bypass any webserver upload size restrictions up to **512MB** - commercial version supports up to **5GB**
 
-= Works with PHP v5.2.17 and above =
-* We tested the plugin on a php compiled with the following modules:
-`./configure --with-zlib --with-mysql`
+= 0 Dependencies =
+* The plugin doesn't require any php extensions and can work with php v5.2
 
 = Support for MySQL, PDO, MySQLi =
 * No matter what php mysql driver your webserver ships with, we support it
 
-= Support for ZipArchive and PclZIP =
-* Your export files are archived using the fast ZipArchive pecl extension. If your server doesn't have it, we fall back to PclZIP which is included in WordPress
+= Support WordPress v3.3 up to v4.0 =
+* We tested every WordPress version from `3.3` up to `4.0`
 
-= WordPress v3.3 Support =
-* We tested every WordPress version from `3.3` up to `3.9.2`
-
-* [Get free help from us here](https://servmask.com/#contactModal)
-* [Report a bug or request a feature](https://servmask.com/#contactModal)
 * [Find out more about us](https://servmask.com)
 
 [youtube http://www.youtube.com/watch?v=5FMzLf9a4Dc]
@@ -61,8 +49,11 @@ All in One WP Plugin is the first plugin to offer true mobile experience on Word
 3. Plugin Menu
 
 == Changelog ==
-= 2.0.4 =
-* Update readme to reflect that the plugin is not multisite compatible
+= 2.1.1 =
+* Added export/import to buttons with file/dropbox/amazon/google targets
+* Implemented our own archiving format that reduces export and import by a factor of 10
+* Both export and import happen in time chunks of 3 seconds
+* Simplified export page
 
 = 2.0.3 =
 * Fixed a security issue when importing site using regular users

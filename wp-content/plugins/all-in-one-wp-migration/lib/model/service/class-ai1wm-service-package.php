@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) 2014 ServMask Inc.
  *
@@ -22,13 +23,15 @@
  * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
+class Ai1wm_Service_Package implements Ai1wm_Service_Interface {
 
-class Ai1wm_Service_Package implements Ai1wm_Service_Interface
-{
-	protected $options = array();
+	protected $args    = array();
 
-	public function __construct( array $options = array() ) {
-		$this->options = $options;
+	protected $storage = null;
+
+	public function __construct( array $args = array() ) {
+		// Set arguments
+		$this->args = $args;
 	}
 
 	/**
@@ -39,20 +42,27 @@ class Ai1wm_Service_Package implements Ai1wm_Service_Interface
 	public function import() {
 		global $wp_version;
 
+		$config = array();
+		$config = json_decode( file_get_contents( $this->storage()->package() ), true );
+
 		// Get config file
-		$data = file_get_contents( StorageArea::getInstance()->getRootPath() . AI1WM_PACKAGE_NAME );
+		if ( false === is_null( $config ) ) {
+			// Add plugin version
+			if ( ! isset( $config['Plugin']['Version'] ) ) {
+				$config['Plugin']['Version'] = AI1WM_VERSION;
+			}
 
-		// Parse config file
-		$config = json_decode( $data, true );
+			// Add WordPress version
+			if ( ! isset( $config['WordPress']['Version'] ) ) {
+				$config['WordPress']['Version'] = $wp_version;
+			}
 
-		// Add plugin version
-		if ( ! isset( $config['Plugin']['Version'] ) ) {
-			$config['Plugin']['Version'] = AI1WM_VERSION;
-		}
-
-		// Add wordpress version
-		if ( ! isset( $config['WordPress']['Version'] ) ) {
-			$config['WordPress']['Version'] = $wp_version;
+			// Add WordPress content
+			if ( ! isset( $config['WordPress']['Content'] ) ) {
+				$config['WordPress']['Content'] = WP_CONTENT_DIR;
+			}
+		} else {
+			throw new Ai1wm_Import_Exception( 'Unable to parse package.json file' );
 		}
 
 		return $config;
@@ -67,12 +77,28 @@ class Ai1wm_Service_Package implements Ai1wm_Service_Interface
 		global $wp_version;
 
 		$config = array(
-			'SiteURL' => site_url(),
-			'HomeURL' => home_url(),
-			'Plugin' => array( 'Version' => AI1WM_VERSION ),
-			'WordPress' => array( 'Version' => $wp_version ),
+			'SiteURL'   => site_url(),
+			'HomeURL'   => home_url(),
+			'Plugin'    => array( 'Version' => AI1WM_VERSION ),
+			'WordPress' => array( 'Version' => $wp_version, 'Content' => WP_CONTENT_DIR ),
 		);
 
-		return json_encode( $config );
+		// Save config
+		$package = fopen( $this->storage()->package(), 'w' );
+		fwrite( $package, json_encode( $config ) );
+		fclose( $package );
+	}
+
+	/*
+	 * Get storage object
+	 *
+	 * @return Ai1wm_Storage
+	 */
+	protected function storage() {
+		if ( $this->storage === null ) {
+			$this->storage = new Ai1wm_Storage( $this->args );
+		}
+
+		return $this->storage;
 	}
 }
